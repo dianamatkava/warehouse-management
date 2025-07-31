@@ -5,10 +5,10 @@ class InventoryBatchModel:
     reference: str
     sku: str
     eta: date | None
-    qty: int  # initial quantity
+    _purchased_quantity: int  # initial quantity
 
     def __init__(self, reference, sku, eta, qty):
         self.reference = reference
         self.sku = sku
         self.eta = eta
-        self.qty = qty
+        self._purchased_quantity = qty

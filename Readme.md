@@ -267,7 +267,7 @@ class UnitOfWork:
     * Helper functions that convert between domain objects (`Batch`, `Allocation`) and DTOs (`BatchSchemaDTO`, `AllocationSchemaDTO`).
 
 ```python
-# Example from services/product_service.py
+# Example from services/test_product_service.py
 
 from typing import List
 from ..adapters.uow import UnitOfWork

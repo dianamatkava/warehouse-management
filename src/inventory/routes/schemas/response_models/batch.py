@@ -17,9 +17,6 @@ class BatchesListResponseModel(BatchSchemaDTO):
             description="ETA ((Estimated Time of Arrival). Batches have an ETA if they are currently shipping. We allocate to shipment batches in order of which has the earliest ETA."
         ),
     ]
-    available_quantity: Annotated[
+    qty: Annotated[
         int, Field(description="Quantity of the product available in the batch.")
-    ]
-    allocated_quantity: Annotated[
-        int, Field(description="Quantity of the product allocated to the batch.")
     ]

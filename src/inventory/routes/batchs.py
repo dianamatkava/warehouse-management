@@ -72,4 +72,4 @@ def delete_batch(
     Will return 404 if the batch is not found.
     The operation cannot be undone.
     """
-    return batch_service.delete_batch(ref)
+    batch_service.delete_batch(ref)

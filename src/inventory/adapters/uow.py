@@ -23,7 +23,7 @@ class InventoryBatchUnitOfWork(AbstractUnitOfWork):
     Manages session life cycle.
     """
 
-    batch_repo: AbstractRepository
+    batch_repo: InventoryBatchRepository
 
     def __init__(
         self,
@@ -31,10 +31,11 @@ class InventoryBatchUnitOfWork(AbstractUnitOfWork):
         batch_repo: Type[AbstractRepository] = InventoryBatchRepository,
     ):
         self.session_factory = session_factory
-        self.batch_repo: batch_repo
+        self.batch_repo_cls = batch_repo
 
     def __enter__(self) -> Self:
         self.session: Session = self.session_factory()
+        self.batch_repo = self.batch_repo_cls(session=self.session)
         return super().__enter__()
 
     def __exit__(self, *args):
@@ -66,7 +67,7 @@ class ProductUnitOfWork(AbstractUnitOfWork):
 
     def __enter__(self) -> Self:
         self.session: Session = self.session_factory()
-        self.product_repo = self.product_repo_cls(self.session)
+        self.product_repo = self.product_repo_cls(session=self.session)
         return super().__enter__()
 
     def __exit__(self, *args):

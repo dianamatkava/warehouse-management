@@ -1,4 +1,4 @@
-from typing import Annotated, Any
+from typing import Annotated
 
 from fastapi import Depends
 
@@ -16,12 +16,12 @@ def get_product_unit_of_work() -> ProductUnitOfWork:
 
 
 def get_batch_service(
-    uof: Annotated[Any, Depends(get_batch_unit_of_work)],
+    uow: Annotated[InventoryBatchUnitOfWork, Depends(get_batch_unit_of_work)],
 ) -> BatchService:
-    return BatchService(uow=uof)
+    return BatchService(uow=uow)
 
 
 def get_product_service(
-    uow: Annotated[Any, Depends(get_product_unit_of_work)],
+    uow: Annotated[ProductUnitOfWork, Depends(get_product_unit_of_work)],
 ) -> ProductService:
     return ProductService(uow=uow)

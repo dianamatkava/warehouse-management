@@ -14,7 +14,7 @@ class InventoryBatchRepository(AbstractRepository):
     def __init__(self, session: Session):
         self.session = session
 
-    def get(self, reference: str) -> Type[InventoryBatchModel]:
+    def get(self, reference: str) -> InventoryBatchModel:
         return (
             self.session.query(InventoryBatchModel).filter_by(reference=reference).one()
         )
@@ -22,7 +22,7 @@ class InventoryBatchRepository(AbstractRepository):
     def add(self, batch: InventoryBatchModel) -> None:
         self.session.add(batch)
 
-    def list(self) -> List[Type[InventoryBatchModel]]:
+    def list(self) -> List[InventoryBatchModel]:
         return self.session.query(InventoryBatchModel).all()
 
     def delete(self, reference: str) -> None:

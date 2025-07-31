@@ -1,18 +1,11 @@
-from src.allocations.domain import product_model as domain
-from src.allocations.services.schemas import AllocationSchemaDTO, BatchSchemaDTO
+from src.allocations.services.schemas import BatchSchemaDTO
+from src.inventory.domain.batch_model import InventoryBatchModel
 
 
-def transform_batch_to_batch_schema(batch: domain.BatchModel) -> BatchSchemaDTO:
+def transform_batch_model_to_dto(batch: InventoryBatchModel) -> BatchSchemaDTO:
     return BatchSchemaDTO(
         reference=batch.reference,
         sku=batch.sku,
         eta=batch.eta,
-        available_quantity=batch.available_quantity,
-        allocated_quantity=batch.allocated_quantity,
-        allocations=[
-            AllocationSchemaDTO(
-                order_id=allocation.order_id, sku=allocation.sku, qty=allocation.qty
-            )
-            for allocation in batch.allocations
-        ],
+        qty=batch._purchased_quantity,
     )
